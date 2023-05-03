@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">StarWarApplication</string>
+    <string name="tab_text_1">Home</string>
+    <string name="tab_text_2">Favorites</string>
+    <string name="text_character">Character(s)</string>
+    <string name="text_starship">Starships</string>
+    <string name="text_film">Films</string>
+</resources>
