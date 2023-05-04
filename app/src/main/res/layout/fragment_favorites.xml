@@ -6,16 +6,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/tv_label_character"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Characters"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_favorite_chars"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_label_character"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:listitem="@layout/listitem_favorite_characters"
       />
+
+    <TextView
+        android:id="@+id/tv_label_starship"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Starships"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="rv_favorite_chars"
+        app:layout_constraintTop_toBottomOf="@+id/rv_favorite_chars"
+
+        />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_favorite_starships"
@@ -24,10 +47,11 @@
         android:layout_margin="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rv_favorite_chars"
-        app:layout_constraintVertical_bias="0"
- />
+        app:layout_constraintTop_toBottomOf="@id/tv_label_starship"
+        app:layout_constraintVertical_bias="0.0"
+        tools:listitem="@layout/listitem_favorite_starships" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

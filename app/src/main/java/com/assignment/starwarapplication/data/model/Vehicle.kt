@@ -25,6 +25,15 @@ open class Vehicle : Serializable {
     @SerializedName("max_atmosphering_speed")
     var maxAtmospheringSpeed: String? = null
 
+    @SerializedName("starship_class")
+    var starshipClass: String? = null
+
+    @SerializedName("hyperdrive_rating")
+    var hyperdriveRating: String? = null
+
+    @SerializedName("MGLT")
+    var mglt: String? = null
+
     @SerializedName("cargo_capacity")
     var cargoCapacity: String? = null
     var consumables: String? = null

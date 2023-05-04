@@ -3,17 +3,13 @@ package com.assignment.starwarapplication.ui.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.assignment.starwarapplication.data.model.Film
-import com.assignment.starwarapplication.data.model.People
-import com.assignment.starwarapplication.data.model.SWModelList
-import com.assignment.starwarapplication.data.model.Starship
+import com.assignment.starwarapplication.data.model.*
 import com.assignment.starwarapplication.repository.MainActivityRepository
 
 class MainViewModel() : ViewModel() {
 
     lateinit var characterList: MutableLiveData<SWModelList<People?>?>
-    val starshipList = MutableLiveData<Starship>()
-    val filmList = MutableLiveData<Film>()
+    lateinit var starshipList: MutableLiveData<SWModelList<Vehicle?>?>
 
     val errorMessage = MutableLiveData<String>()
 
@@ -21,6 +17,11 @@ class MainViewModel() : ViewModel() {
             characterList = MainActivityRepository.getPeopleApiCall(query)
             return characterList
         }
+
+    fun getStarship(query: String) : LiveData<SWModelList<Vehicle?>?> {
+        starshipList = MainActivityRepository.getStarshipApiCall(query)
+        return starshipList
+    }
 
 /*    fun getStarships() {
 
@@ -57,12 +58,6 @@ class MainViewModel() : ViewModel() {
 
 
     private val _index = MutableLiveData<Int>()
-/*
-    val text: LiveData<String> = Transformations.map(_index) {
-        "Hello world from section: $it"
-    }
-*/
-
     fun setIndex(index: Int) {
         _index.value = index
     }

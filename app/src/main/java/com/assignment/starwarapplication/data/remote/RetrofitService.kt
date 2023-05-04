@@ -25,11 +25,18 @@ interface RetrofitService {
         callback: Callback<SWModelList<People?>?>?
     )
 
+/*
     @GET("/people/{id}/")
     fun getPeople(@Path("id") peopleId: Int,callback: Callback<People?>?)
+*/
 
     @GET("/api/people/")
-    fun getPeopletest(@Query("search") query: String) : Call<SWModelList<People?>?>
+    fun getPeople(@Query("search") query: String) : Call<SWModelList<People?>?>
+
+
+    @GET("/api/starships/")
+    fun getStarship(@Query("search") query: String) : Call<SWModelList<Vehicle?>?>
+
 
 
     @GET("/films/")
@@ -50,11 +57,13 @@ interface RetrofitService {
         callback: Callback<SWModelList<Starship?>?>?
     )
 
+/*
     @GET("/starships/{id}/")
     fun getStarship(
         @Path("id") starshipId: Int,
         callback: Callback<Starship?>?
     )
+*/
 
     @GET("/vehicles/")
     fun getAllVehicles(
@@ -93,7 +102,6 @@ interface RetrofitService {
     )
 
     object RetrofitClient {
-
         val retrofitClient: Retrofit.Builder by lazy {
 
             val levelType: Level
@@ -119,25 +127,4 @@ interface RetrofitService {
         }
     }
 
-/*    @GET("api/people//{character}/")
-    Call<List<Playlist> getUserPlaylists(@Path(value = "character", encoded = true) String userId);*/
-/*
-    companion object {
-
-        var retrofitService: RetrofitService? = null
-
-        //Create the RetrofitService instance using the retrofit.
-        fun getInstance(): RetrofitService {
-
-            if (retrofitService == null) {
-                val retrofit = Retrofit.Builder()
-                    .baseUrl(APIConstants.BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build()
-                retrofitService = retrofit.create(RetrofitService::class.java)
-                Log.d("arun","test")
-            }
-            return retrofitService!!
-        }
-    }*/
 }

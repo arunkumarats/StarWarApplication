@@ -2,9 +2,10 @@ package com.assignment.starwarapplication.ui.main
 
 import android.os.Bundle
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ProgressBar
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -15,9 +16,9 @@ import com.assignment.starwarapplication.R
 import com.assignment.starwarapplication.data.model.People
 import com.google.gson.Gson
 
-
-// Here ":" symbol is indicate that LoginFragment
-// is child class of Fragment Class
+/*
+@author Arun Kumar Thayalan
+*/
 class HomeFragment : Fragment() {
     lateinit var searchView: SearchView
     lateinit var progressView: ProgressBar
@@ -42,19 +43,6 @@ class HomeFragment : Fragment() {
         progressView = view?.findViewById(R.id.progressbar_home)!!
         rv_charactersView = view?.findViewById(R.id.rv_charactersview)!!
 
-
-
-
-
-
-/*        rv_charactersView.apply {
-            // set a LinearLayoutManager to handle Android
-            // RecyclerView behavior
-            layoutManager = LinearLayoutManager(activity)
-            // set the custom adapter to the RecyclerView
-            customadapter = CustomResultsAdapter(msg)
-        }*/
-
         return view
     }
 
@@ -69,8 +57,6 @@ class HomeFragment : Fragment() {
     }
 
 
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         rv_charactersView.layoutManager = LinearLayoutManager(activity)
@@ -82,13 +68,12 @@ class HomeFragment : Fragment() {
             override fun onQueryTextSubmit(query: String): Boolean {
 
 
-
                 return false
             }
 
             override fun onQueryTextChange(query: String): Boolean {
 
-                if(query.length>2) {
+                if (query.length > 2) {
                     progressView.visibility = View.VISIBLE
                     mainActivityViewModel.getPeople(query)!!
                         .observe(viewLifecycleOwner, Observer { serviceSetterGetter ->
@@ -96,23 +81,7 @@ class HomeFragment : Fragment() {
                             progressView.visibility = View.GONE
                             (customadapter as CustomResultsAdapter).submitList(serviceSetterGetter?.results!!)
                             (customadapter as CustomResultsAdapter).notifyDataSetChanged()
-                            //    customadapter?.notifyDataSetChanged()
-                            /*                     serviceSetterGetter ->
-
-                                         var msg = ArrayList<People?>()
-                                         msg.addAll(serviceSetterGetter?.results!!)
-                                         if (msg != null) {
-                                             Log.v("arun", msg.toString())
-                                         }
-                                         customadapter = CustomResultsAdapter(msg)
-                                         rv_charactersView.adapter = customadapter
-
-                                         customadapter?.notifyDataSetChanged()*/
-
                         })
-
-
-
 
                     Log.v("arun", "query entered")
                 }
@@ -121,7 +90,4 @@ class HomeFragment : Fragment() {
         })
     }
 
-
-    // Here "layout_login" is a name of layout file
-    // created for LoginFragment
 }
