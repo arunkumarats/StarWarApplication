@@ -15,8 +15,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.assignment.starwarapplication.R
 import com.assignment.starwarapplication.data.model.People
 
-/*
-@author Arun Kumar Thayalan
+/**
+ * @author Arun
+ * Home module fragment
+ *
 */
 class HomeFragment : Fragment() {
     lateinit var searchView: SearchView
@@ -25,7 +27,7 @@ class HomeFragment : Fragment() {
     lateinit var mainActivityViewModel: MainViewModel
     var msg = ArrayList<People?>()
     private var layoutManager: RecyclerView.LayoutManager? = null
-    private var customadapter: RecyclerView.Adapter<CustomResultsAdapter.ViewHolder>? = null
+    private var customadapter: RecyclerView.Adapter<SearchResultsAdapter.ViewHolder>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,7 +50,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         rv_charactersView.layoutManager = LinearLayoutManager(activity)
-        customadapter = CustomResultsAdapter(msg)
+        customadapter = SearchResultsAdapter(msg)
         rv_charactersView.adapter = customadapter
 
 
@@ -61,14 +63,14 @@ class HomeFragment : Fragment() {
 
             override fun onQueryTextChange(query: String): Boolean {
 
-                if (query.length > 2) {
+                if (query.length > 1) {
                     progressView.visibility = View.VISIBLE
                     mainActivityViewModel.getPeople(query)!!
                         .observe(viewLifecycleOwner, Observer { serviceSetterGetter ->
 
                             progressView.visibility = View.GONE
-                            (customadapter as CustomResultsAdapter).submitList(serviceSetterGetter?.results!!)
-                            (customadapter as CustomResultsAdapter).notifyDataSetChanged()
+                            (customadapter as SearchResultsAdapter).submitList(serviceSetterGetter?.results!!)
+                            (customadapter as SearchResultsAdapter).notifyDataSetChanged()
                         })
 
                     Log.v("DEBUG", "query entered")

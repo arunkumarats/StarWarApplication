@@ -1,8 +1,8 @@
 package com.assignment.starwarapplication;
 
 /**
- * Created by Oleur on 21/12/2014.
- * API constants
+ * @author Arun
+ * STARWAR application constants
  */
 public class APIConstants {
     public static final String BASE_URL = "https://swapi.dev/";

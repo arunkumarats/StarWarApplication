@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.assignment.starwarapplication.R
+import com.assignment.starwarapplication.data.local.prefs.AppPreferencesHelper
 import com.assignment.starwarapplication.data.model.People
 import com.assignment.starwarapplication.data.model.Vehicle
 import com.google.gson.Gson
@@ -55,19 +56,13 @@ class FavoriteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        //load starwar app shared preference
-        var prefs: SharedPreferences = requireActivity().getSharedPreferences(
-            "starwar_pref",
-            Context.MODE_PRIVATE
-        )
-
         /*
         CHARACTER(PEOPLE)
         below statements read string from sharedpref, convert string to json, covert json to arraylist
         and set arraylist to favorite people recyler view adapter
          */
-        favoritePrefJson = prefs.getString("fav_people_list", "[]").toString()
+        favoritePrefJson = AppPreferencesHelper(requireContext()).getFavoriteChars()
+       // favoritePrefJson = prefs.getString("fav_people_list", "[]").toString()
         favoritePrefList = object : TypeToken<ArrayList<People?>?>() {}.getType()
         favPeopleListPerf = Gson().fromJson(favoritePrefJson, favoritePrefList)
         viewFavPeople.adapter = FavoritePeopleAdapter(favPeopleListPerf)
@@ -77,7 +72,7 @@ class FavoriteFragment : Fragment() {
          below statements read string from sharedpref, convert string to json, covert json to arraylist
          and set arraylist to favorite starship recyler view adapter
         */
-        favoritePrefJson = prefs.getString("fav_starship_list", "[]").toString()
+        favoritePrefJson =AppPreferencesHelper(requireContext()).getFavoriteStarship()
         favoritePrefList = object : TypeToken<ArrayList<Vehicle?>?>() {}.getType()
         favStarshipListPerf = Gson().fromJson(favoritePrefJson, favoritePrefList)
         viewFavStarship.adapter = FavoriteStarshipAdapter(favStarshipListPerf)
