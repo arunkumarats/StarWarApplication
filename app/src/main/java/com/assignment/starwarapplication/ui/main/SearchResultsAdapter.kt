@@ -22,25 +22,25 @@ import kotlin.collections.ArrayList
  */
 
 class SearchResultsAdapter(private var searchResultList: ArrayList<People?>): RecyclerView.Adapter<SearchResultsAdapter.ViewHolder>() {
-    private var fav_list = ArrayList<People?>()
+    private var favItem = ArrayList<People?>()
     override fun getItemCount(): Int {
         return searchResultList.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var peopleData = searchResultList[position]
-        holder?.txt_name?.text = peopleData?.name
-        holder?.txt_gender?.text = "Gender: "+peopleData?.gender
-        holder?.txt_ships?.text = "Number of ships: "+peopleData?.starshipsUrls?.size.toString()
+        holder.txtName?.text = peopleData?.name
+        holder.txtGender?.text = "Gender: "+peopleData?.gender
+        holder.txtShips?.text = "Number of ships: "+peopleData?.starshipsUrls?.size.toString()
 
-        holder?.btn_fav?.setOnClickListener{
+        holder.btnFav?.setOnClickListener{
             Log.v("DEBUG : button clicked at position", peopleData?.name.toString() )
 
-            var json: String = AppPreferencesHelper(it.context).getFavoriteChars()
+            var json: String = AppPreferencesHelper(it.context).favoriteChars
             val type = object : TypeToken<java.util.ArrayList<People?>?>() {}.getType()
-            fav_list = Gson().fromJson(json, type)
-            fav_list.add(peopleData)
-            json = Gson().toJson(fav_list)
+            favItem = Gson().fromJson(json, type)
+            favItem.add(peopleData)
+            json = Gson().toJson(favItem)
 
             AppPreferencesHelper(it.context).setFavoriteChar(json)
 
@@ -49,7 +49,7 @@ class SearchResultsAdapter(private var searchResultList: ArrayList<People?>): Re
        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView = LayoutInflater.from(parent?.context)
+        val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.listitem_home_characters, parent, false)
 
         return ViewHolder(itemView)
@@ -62,20 +62,10 @@ class SearchResultsAdapter(private var searchResultList: ArrayList<People?>): Re
     }
 
     class ViewHolder(row: View) : RecyclerView.ViewHolder(row) {
-        var txt_name: TextView? = null
-        var txt_gender: TextView? = null
-        var txt_ships: TextView?= null
-        var btn_fav : ImageButton?= null
-
-        init {
-            this.txt_name = row?.findViewById<TextView>(R.id.tv_name)
-            this.txt_gender = row?.findViewById<TextView>(R.id.tv_gender)
-            this.txt_ships = row?.findViewById<TextView>(R.id.tv_ships)
-            this.btn_fav = row?.findViewById<ImageButton>(R.id.button)
-
-
-        }
-
+        var txtName: TextView =  row.findViewById(R.id.tv_name)
+        var txtGender: TextView? = row.findViewById(R.id.tv_gender)
+        var txtShips: TextView?= row.findViewById(R.id.tv_ships)
+        var btnFav : ImageButton?= row.findViewById(R.id.button)
 
     }
 }
