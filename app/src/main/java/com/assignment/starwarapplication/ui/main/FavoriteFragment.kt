@@ -33,8 +33,8 @@ class FavoriteFragment : Fragment() {
     private var favPeopleListPerf = ArrayList<People?>()
     private var favStarshipListPerf = ArrayList<Vehicle?>()
 
-    lateinit private var favoritePrefJson: String
-    lateinit private var favoritePrefList: Type
+    private lateinit var favoritePrefJson: String
+    private lateinit var favoritePrefList: Type
     override fun onCreateView(
 
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?

@@ -21,28 +21,28 @@ import com.assignment.starwarapplication.data.model.People
  *
 */
 class HomeFragment : Fragment() {
-    lateinit var searchView: SearchView
-    lateinit var progressView: ProgressBar
-    lateinit var rv_charactersView: RecyclerView
-    lateinit var mainActivityViewModel: MainViewModel
-    var msg = ArrayList<People?>()
-    private var layoutManager: RecyclerView.LayoutManager? = null
-    private var customadapter: RecyclerView.Adapter<SearchResultsAdapter.ViewHolder>? = null
+    private lateinit var searchView: SearchView
+    private  lateinit var progressView: ProgressBar
+    private lateinit var rv_charactersView: RecyclerView
+    private lateinit var mainActivityViewModel: MainViewModel
+    private var searchListPeople = ArrayList<People?>()
+
+    private var searchResultAdapter: RecyclerView.Adapter<SearchResultsAdapter.ViewHolder>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        val view = inflater?.inflate(
+        val view = inflater.inflate(
             R.layout.fragment_home,
             container, false
         )
         mainActivityViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        searchView = view?.findViewById(R.id.sv_search_bar)!!
-        progressView = view?.findViewById(R.id.progressbar_home)!!
-        rv_charactersView = view?.findViewById(R.id.rv_charactersview)!!
+        searchView = view.findViewById(R.id.sv_search_bar)!!
+        progressView = view.findViewById(R.id.progressbar_home)!!
+        rv_charactersView = view.findViewById(R.id.rv_charactersview)!!
 
         return view
     }
@@ -50,8 +50,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         rv_charactersView.layoutManager = LinearLayoutManager(activity)
-        customadapter = SearchResultsAdapter(msg)
-        rv_charactersView.adapter = customadapter
+        searchResultAdapter = SearchResultsAdapter(searchListPeople)
+        rv_charactersView.adapter = searchResultAdapter
 
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -65,12 +65,12 @@ class HomeFragment : Fragment() {
 
                 if (query.length > 1) {
                     progressView.visibility = View.VISIBLE
-                    mainActivityViewModel.getPeople(query)!!
+                    mainActivityViewModel.getPeople(query)
                         .observe(viewLifecycleOwner, Observer { serviceSetterGetter ->
 
                             progressView.visibility = View.GONE
-                            (customadapter as SearchResultsAdapter).submitList(serviceSetterGetter?.results!!)
-                            (customadapter as SearchResultsAdapter).notifyDataSetChanged()
+                            (searchResultAdapter as SearchResultsAdapter).submitList(serviceSetterGetter?.results!!)
+                            (searchResultAdapter as SearchResultsAdapter).notifyDataSetChanged()
                         })
 
                     Log.v("DEBUG", "query entered")
