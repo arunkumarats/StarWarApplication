@@ -8,7 +8,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
-import com.assignment.starwarapplication.data.model.People
 import com.assignment.starwarapplication.ui.main.FavoriteFragment
 import com.assignment.starwarapplication.ui.main.HomeFragment
 import com.assignment.starwarapplication.ui.main.MainViewModel
@@ -16,9 +15,8 @@ import com.google.android.material.tabs.TabLayout
 
 
 class MainActivity : AppCompatActivity() {
-    lateinit var context: Context
-    private var fav_list = ArrayList<People>()
-    var adapter: ViewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
+    private lateinit var context: Context
+    private var adapter: ViewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
     lateinit var mainActivityViewModel: MainViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         //  setSupportActionBar(tab_toolbar)
         setupViewPager(tab_viewpager)
 
-        // If we dont use setupWithViewPager() method then
+        // If we don't use setupWithViewPager() method then
         // tabs are not used or shown when activity opened
         tab_tablayout.setupWithViewPager(tab_viewpager)
 
@@ -56,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         // setting adapter to view pager.
         viewpager.setAdapter(adapter)
 
-        viewpager?.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+        viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
 
             override fun onPageScrollStateChanged(state: Int) {
             }

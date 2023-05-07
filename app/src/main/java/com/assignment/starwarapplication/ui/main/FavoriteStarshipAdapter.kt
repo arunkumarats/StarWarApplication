@@ -23,10 +23,10 @@ class FavoriteStarshipAdapter(private var items: ArrayList<Vehicle?>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var starShipData = items[position]
-        holder?.txt_fav_name?.text = starShipData?.name
-        holder?.txt_fav_model?.text = "Model: " + starShipData?.model
-        holder?.txt_fav_manufacturer?.text = "Manufacturer: " + starShipData?.manufacturer
-        holder?.txt_fav_passenger?.text = "Passengers: " + starShipData?.passengers
+        holder?.txtFavName?.text = starShipData?.name
+        holder?.txtFavModel?.text = "Model: " + starShipData?.model
+        holder?.txtFavManufacturer?.text = "Manufacturer: " + starShipData?.manufacturer
+        holder?.txtFavPassenger?.text = "Passengers: " + starShipData?.passengers
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -36,16 +36,10 @@ class FavoriteStarshipAdapter(private var items: ArrayList<Vehicle?>) :
     }
 
     class ViewHolder(row: View) : RecyclerView.ViewHolder(row) {
-        var txt_fav_name: TextView? = null
-        var txt_fav_model: TextView? = null
-        var txt_fav_manufacturer: TextView? = null
-        var txt_fav_passenger: TextView? = null
+        var txtFavName: TextView = row.findViewById(R.id.tv_fav_shipname)
+        var txtFavModel: TextView =  row.findViewById(R.id.tv_fav_model)
+        var txtFavManufacturer: TextView = row.findViewById(R.id.tv_fav_manufacturer)
+        var txtFavPassenger: TextView = row.findViewById(R.id.tv_fav_passenger)
 
-        init {
-            this.txt_fav_name = row?.findViewById<TextView>(R.id.tv_fav_shipname)
-            this.txt_fav_model = row?.findViewById<TextView>(R.id.tv_fav_model)
-            this.txt_fav_manufacturer = row?.findViewById<TextView>(R.id.tv_fav_manufacturer)
-            this.txt_fav_passenger = row?.findViewById<TextView>(R.id.tv_fav_passenger)
-        }
     }
 }

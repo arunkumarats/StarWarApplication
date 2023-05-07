@@ -1,16 +1,11 @@
-package com.assignment.starwarapplication.data.local.prefs;
+package com.assignment.starwarapplication.data.local.prefs
 
 /**
  * @author  Arun
  */
-
-public interface PreferencesHelper {
-
-    String getFavoriteChars();
-
-    void setFavoriteChar(String people);
-
-    String getFavoriteStarship();
-
-    void setFavoriteStarship(String starship);
+interface PreferencesHelper {
+    val favoriteChars: String?
+    fun setFavoriteChar(people: String?)
+    var favoriteStarship: String?
+    fun setFavoriteStarship(starship: String?)
 }
