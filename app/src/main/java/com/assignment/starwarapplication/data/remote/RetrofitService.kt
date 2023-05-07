@@ -50,12 +50,12 @@ interface RetrofitService {
         @Path("id") filmId: Int,
         callback: Callback<Film?>?
     )
-
+/*
     @GET("/starships")
     fun getAllStarships(
         @Query("page") page: Int,
         callback: Callback<SWModelList<Starship?>?>?
-    )
+    )*/
 
 /*
     @GET("/starships/{id}/")

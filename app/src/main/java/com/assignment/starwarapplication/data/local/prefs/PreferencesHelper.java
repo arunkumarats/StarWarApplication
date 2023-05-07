@@ -16,9 +16,6 @@
 
 package com.assignment.starwarapplication.data.local.prefs;
 
-import com.assignment.starwarapplication.data.model.People;
-import com.assignment.starwarapplication.data.model.Starship;
-
 /**
  * Created by amitshekhar on 07/07/17.
  */

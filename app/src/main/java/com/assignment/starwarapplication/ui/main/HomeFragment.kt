@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.assignment.starwarapplication.R
 import com.assignment.starwarapplication.data.model.People
-import com.google.gson.Gson
 
 /*
 @author Arun Kumar Thayalan
@@ -46,17 +45,6 @@ class HomeFragment : Fragment() {
         return view
     }
 
-
-    private fun saveData(fav_list: ArrayList<People?>) {
-        val sharedPreferences = requireContext().getSharedPreferences("starwar_prefs", 0)
-        val editor = sharedPreferences.edit()
-        val gson = Gson()
-        val json = gson.toJson(fav_list)
-        editor.putString("fav_people_list", json)
-        editor.apply()
-    }
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         rv_charactersView.layoutManager = LinearLayoutManager(activity)
@@ -83,7 +71,7 @@ class HomeFragment : Fragment() {
                             (customadapter as CustomResultsAdapter).notifyDataSetChanged()
                         })
 
-                    Log.v("arun", "query entered")
+                    Log.v("DEBUG", "query entered")
                 }
                 return false
             }

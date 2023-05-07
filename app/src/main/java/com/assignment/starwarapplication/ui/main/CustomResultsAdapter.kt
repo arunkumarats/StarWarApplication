@@ -1,6 +1,7 @@
 package com.assignment.starwarapplication.ui.main
 
 import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -37,12 +38,26 @@ class CustomResultsAdapter(private var items: ArrayList<People?>): RecyclerView.
         holder?.btn_fav?.setOnClickListener{
             Log.v("DEBUG : button clicked at position", peopleData?.name.toString() )
 
-            val sharedPreferences = it.context.getSharedPreferences("starwar_pref", MODE_PRIVATE)
+         /*   val sharedPreferences = it.context.getSharedPreferences("starwar_pref", MODE_PRIVATE)
             val gson = Gson()
             val json = sharedPreferences.getString("fav_people_list", "")
             val type = object: TypeToken<ArrayList<People>>() {
-            }.type
+            }.type*/
+           // fav_list = gson.fromJson(json, type)
+
+
+            val prefs: SharedPreferences = it.context.getSharedPreferences("starwar_pref", MODE_PRIVATE)
+            val gson = Gson()
+            var json: String = prefs.getString("fav_people_list", "[]").toString()
+            val type = object : TypeToken<java.util.ArrayList<People?>?>() {}.getType()
             fav_list = gson.fromJson(json, type)
+            fav_list.add(peopleData)
+            json = gson.toJson(fav_list)
+            val editor: SharedPreferences.Editor = prefs.edit()
+            editor.putString("fav_people_list", json)
+            editor.apply()
+
+
 
         /*    val sharedPreferences = it.context.getSharedPreferences("starwar_pref", MODE_PRIVATE)
             val editor = sharedPreferences.edit()

@@ -2,13 +2,10 @@ package com.assignment.starwarapplication
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import com.assignment.starwarapplication.data.model.People
@@ -16,17 +13,12 @@ import com.assignment.starwarapplication.ui.main.FavoriteFragment
 import com.assignment.starwarapplication.ui.main.HomeFragment
 import com.assignment.starwarapplication.ui.main.MainViewModel
 import com.google.android.material.tabs.TabLayout
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 class MainActivity : AppCompatActivity() {
     lateinit var context: Context
     private var fav_list = ArrayList<People>()
-
+    var adapter: ViewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
     lateinit var mainActivityViewModel: MainViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         mainActivityViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         // Create the object of Toolbar, ViewPager and
         // TabLayout and use “findViewById()” method*/
-       // var tab_toolbar = findViewById<Toolbar>(R.id.toolbar)
+        // var tab_toolbar = findViewById<Toolbar>(R.id.toolbar)
         var tab_viewpager = findViewById<ViewPager>(R.id.view_pager)
         var tab_tablayout = findViewById<TabLayout>(R.id.tabs)
 
@@ -42,29 +34,19 @@ class MainActivity : AppCompatActivity() {
         // so when we run this project then this activity doesn't
         // show title. And for this reason, we need to run
         // setSupportActionBar method
-      //  setSupportActionBar(tab_toolbar)
+        //  setSupportActionBar(tab_toolbar)
         setupViewPager(tab_viewpager)
 
         // If we dont use setupWithViewPager() method then
         // tabs are not used or shown when activity opened
         tab_tablayout.setupWithViewPager(tab_viewpager)
-    /*    mainActivityViewModel.getPeople("da")!!.observe(this, Observer { serviceSetterGetter ->
-
-
-            var msg = serviceSetterGetter.toString()
-
-            if (msg != null) {
-                Log.v("arun",msg)
-            }
-
-        })*/
 
     }
 
     // This function is used to add items in arraylist and assign
     // the adapter to view pager
     private fun setupViewPager(viewpager: ViewPager) {
-        var adapter: ViewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
+        adapter = ViewPagerAdapter(supportFragmentManager)
 
         // LoginFragment is the name of Fragment and the Login
         // is a title of tab
@@ -73,27 +55,26 @@ class MainActivity : AppCompatActivity() {
 
         // setting adapter to view pager.
         viewpager.setAdapter(adapter)
+
+        viewpager?.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+
+            override fun onPageScrollStateChanged(state: Int) {
+            }
+
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+
+            }
+
+            override fun onPageSelected(position: Int) {
+                viewpager.getAdapter()?.notifyDataSetChanged();
+            }
+
+        })
     }
-
-
- /*   public fun saveData() {
-        val sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        val gson = Gson()
-        val json = gson.toJson(fav_list)
-        editor.putString("task list", json)
-        editor.apply()
-    }
-
-    public fun loadData() {
-        val sharedPreferences = getSharedPreferences("starwar_prefs", MODE_PRIVATE)
-        val gson = Gson()
-        val json = sharedPreferences.getString("fav_people_list", "")
-        val type = object: TypeToken<ArrayList<People>>() {
-        }.type
-            fav_list = gson.fromJson(json, type)
-    }*/
-
 
 
     // This "ViewPagerAdapter" class overrides functions which are
@@ -113,6 +94,10 @@ class MainActivity : AppCompatActivity() {
         // returns which item is selected from arraylist of fragments.
         override fun getItem(position: Int): Fragment {
             return fragmentList1.get(position)
+        }
+
+        override fun getItemPosition(`object`: Any): Int {
+            return POSITION_NONE
         }
 
         // returns which item is selected from arraylist of titles.

@@ -1,5 +1,7 @@
 package com.assignment.starwarapplication.ui.main
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,41 +10,77 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.assignment.starwarapplication.R
+import com.assignment.starwarapplication.data.model.People
+import com.assignment.starwarapplication.data.model.Vehicle
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import java.lang.reflect.Type
 
-// Here ":" symbol is indicate that LoginFragment
-// is child class of Fragment Class
+/**
+ *  @author Arun
+ *
+ *  Favorite Module's main fragment
+ *  fragment to populate favorite character and favorite starship which is marked from search results
+ */
 class FavoriteFragment : Fragment() {
 
-    lateinit var rv_fav_character: RecyclerView
-    lateinit var rv_fav_starship: RecyclerView
     private var layoutManager: RecyclerView.LayoutManager? = null
-    private var FavCharAdapter: RecyclerView.Adapter<FavoritePeopleAdapter.ViewHolder>? = null
-    private var FavStarshipAdapter: RecyclerView.Adapter<FavoriteStarshipAdapter.ViewHolder>? = null
 
+    lateinit var viewFavPeople: RecyclerView
+    lateinit var viewFavStarship: RecyclerView
+
+    private var favPeopleListPerf = ArrayList<People?>()
+    private var favStarshipListPerf = ArrayList<Vehicle?>()
+
+    lateinit private var favoritePrefJson: String
+    lateinit private var favoritePrefList: Type
     override fun onCreateView(
+
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-       val view = inflater?.inflate(
+        val view = inflater?.inflate(
             R.layout.fragment_favorites, container, false
         )
 
-        rv_fav_character = view?.findViewById(R.id.rv_favorite_chars)!!
-        rv_fav_starship = view?.findViewById(R.id.rv_favorite_starships)!!
+        viewFavPeople = view?.findViewById(R.id.rv_favorite_chars)!!
+        viewFavStarship = view?.findViewById(R.id.rv_favorite_starships)!!
+        viewFavPeople.layoutManager =
+            LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        viewFavStarship.layoutManager =
+            LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
 
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        rv_fav_character.layoutManager = LinearLayoutManager(activity)
-      //  FavCharAdapter = FavoritePeopleAdapter(msg)
-        rv_fav_character.adapter = FavCharAdapter
 
-        rv_fav_starship.layoutManager = LinearLayoutManager(activity)
-      //  FavStarshipAdapter = FavoriteStarshipAdapter(msg)
-        rv_fav_starship.adapter = FavCharAdapter
+
+        //load starwar app shared preference
+        var prefs: SharedPreferences = requireActivity().getSharedPreferences(
+            "starwar_pref",
+            Context.MODE_PRIVATE
+        )
+
+        /*
+        CHARACTER(PEOPLE)
+        below statements read string from sharedpref, convert string to json, covert json to arraylist
+        and set arraylist to favorite people recyler view adapter
+         */
+        favoritePrefJson = prefs.getString("fav_people_list", "[]").toString()
+        favoritePrefList = object : TypeToken<ArrayList<People?>?>() {}.getType()
+        favPeopleListPerf = Gson().fromJson(favoritePrefJson, favoritePrefList)
+        viewFavPeople.adapter = FavoritePeopleAdapter(favPeopleListPerf)
+
+        /*
+        STARSHIP
+         below statements read string from sharedpref, convert string to json, covert json to arraylist
+         and set arraylist to favorite starship recyler view adapter
+        */
+        favoritePrefJson = prefs.getString("fav_starship_list", "[]").toString()
+        favoritePrefList = object : TypeToken<ArrayList<Vehicle?>?>() {}.getType()
+        favStarshipListPerf = Gson().fromJson(favoritePrefJson, favoritePrefList)
+        viewFavStarship.adapter = FavoriteStarshipAdapter(favStarshipListPerf)
+
     }
-
-
-
 }

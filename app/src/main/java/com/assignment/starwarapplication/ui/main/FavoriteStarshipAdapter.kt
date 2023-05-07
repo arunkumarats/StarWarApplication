@@ -35,12 +35,6 @@ class FavoriteStarshipAdapter(private var items: ArrayList<Vehicle?>) :
         return ViewHolder(itemView)
     }
 
-    fun submitList(newData: ArrayList<Vehicle?>) {
-        items.clear()
-        items.addAll(newData)
-        notifyDataSetChanged()
-    }
-
     class ViewHolder(row: View) : RecyclerView.ViewHolder(row) {
         var txt_fav_name: TextView? = null
         var txt_fav_model: TextView? = null

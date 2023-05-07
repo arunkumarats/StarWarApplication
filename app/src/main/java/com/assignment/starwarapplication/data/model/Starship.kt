@@ -8,6 +8,7 @@ import java.io.Serializable
  * Starship model represents a single transport craft that has hyperdrive capability.
  */
 
+/*
 class Starship : Vehicle(), Serializable {
     @SerializedName("starship_class")
     var starshipClass: String? = null
@@ -17,4 +18,4 @@ class Starship : Vehicle(), Serializable {
 
     @SerializedName("MGLT")
     var mglt: String? = null
-}
+}*/
