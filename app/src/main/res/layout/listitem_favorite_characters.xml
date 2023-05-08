@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Gender"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/starwar_margin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_fav_name" />
 
@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ships:"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/starwar_margin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_fav_gender" />
 
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:text="Films:"
         android:textFontWeight="@integer/material_motion_duration_short_1"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/starwar_margin"
         android:inputType="textMultiLine"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_fav_ships" />
