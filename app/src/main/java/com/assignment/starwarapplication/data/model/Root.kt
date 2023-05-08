@@ -4,7 +4,8 @@ import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 /**
- * Created by Oleur on 21/12/2014.
+ * @author Arun
+ * @see SwapAPI documentation
  * Root model that provides information on all avaiable resources within the API.
  */
 class Root : Serializable {

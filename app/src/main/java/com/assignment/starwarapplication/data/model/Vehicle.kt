@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 /**
- * @author Arun Kumar Thayalan
+ * @author Arun
  * @see SwapAPI documentation
  * Vehicle model represents a single transport craft that does not have hyperdrive capability.
  */

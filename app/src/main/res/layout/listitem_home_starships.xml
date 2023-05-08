@@ -45,14 +45,15 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_model" />
 
     <ImageButton
-        android:id="@+id/button"
+        android:id="@+id/button_fav_starship"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:adjustViewBounds="true"
         android:src="@android:drawable/btn_star"
         android:text="Button"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1"
         app:layout_constraintStart_toEndOf="@+id/tv_passenger"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_shipname" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

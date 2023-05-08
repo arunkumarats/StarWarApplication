@@ -2,10 +2,10 @@ package com.assignment.starwarapplication.data.model
 
 
 import com.google.gson.annotations.SerializedName
-import java.io.Serializable
 
 /**
- * Created by Oleur on 21/12/2014.
+ * @author Arun
+ * @see SwapAPI documentation
  * People model represents an individual person or character within the Star Wars universe.
  */
 data class People (

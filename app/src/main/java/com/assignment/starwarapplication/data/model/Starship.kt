@@ -4,7 +4,8 @@ import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 /**
- * Created by Oleur on 22/12/2014.
+ * @author Arun
+ * @see SwapAPI documentation
  * Starship model represents a single transport craft that has hyperdrive capability.
  */
 

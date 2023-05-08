@@ -21,7 +21,7 @@ import kotlin.collections.ArrayList
  * Adapter class for Search results
  */
 
-class SearchResultsAdapter(private var searchResultList: ArrayList<People?>): RecyclerView.Adapter<SearchResultsAdapter.ViewHolder>() {
+class SearchResultsCharacterAdapter(private var searchResultList: ArrayList<People?>): RecyclerView.Adapter<SearchResultsCharacterAdapter.ViewHolder>() {
     private var favItem = ArrayList<People?>()
     override fun getItemCount(): Int {
         return searchResultList.size
@@ -36,13 +36,13 @@ class SearchResultsAdapter(private var searchResultList: ArrayList<People?>): Re
         holder.btnFav?.setOnClickListener{
             Log.v("DEBUG : button clicked at position", peopleData?.name.toString() )
 
-            var json: String = AppPreferencesHelper(it.context).favoriteChars
+            var json: String = AppPreferencesHelper(it.context).favoriteChars.toString()
             val type = object : TypeToken<java.util.ArrayList<People?>?>() {}.getType()
             favItem = Gson().fromJson(json, type)
             favItem.add(peopleData)
             json = Gson().toJson(favItem)
 
-            AppPreferencesHelper(it.context).setFavoriteChar(json)
+            AppPreferencesHelper(it.context).favoriteChars = json
 
         }
 
@@ -63,9 +63,9 @@ class SearchResultsAdapter(private var searchResultList: ArrayList<People?>): Re
 
     class ViewHolder(row: View) : RecyclerView.ViewHolder(row) {
         var txtName: TextView =  row.findViewById(R.id.tv_name)
-        var txtGender: TextView? = row.findViewById(R.id.tv_gender)
-        var txtShips: TextView?= row.findViewById(R.id.tv_ships)
-        var btnFav : ImageButton?= row.findViewById(R.id.button)
+        var txtGender: TextView = row.findViewById(R.id.tv_gender)
+        var txtShips: TextView= row.findViewById(R.id.tv_ships)
+        var btnFav : ImageButton= row.findViewById(R.id.button)
 
     }
 }

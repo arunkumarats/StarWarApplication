@@ -10,11 +10,21 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+/**
+ * @author Arun
+ * Repository class for Character and Vehicle API
+ * future use case API calls- success/failure response can be handled here
+ */
 object MainActivityRepository {
 
     val peopleSetterGetter = MutableLiveData<SWModelList<People?>?>()
     val vehicleSetterGetter = MutableLiveData<SWModelList<Vehicle?>?>()
 
+    /**
+     * Character API call handling
+     * @param Query: Search string
+     * @return Arraylist of characters
+     */
     fun getPeopleApiCall(query: String): MutableLiveData<SWModelList<People?>?> {
 
         val call = RetrofitService.RetrofitClient.apiInterface.getPeople(query)
@@ -38,6 +48,12 @@ object MainActivityRepository {
     }
 
 
+
+    /**
+     * Starships API call handling
+     * @param Query: Search string
+     * @return Arraylist of starships
+     */
     fun getStarshipApiCall(query: String): MutableLiveData<SWModelList<Vehicle?>?> {
 
         val call = RetrofitService.RetrofitClient.apiInterface.getStarship(query)

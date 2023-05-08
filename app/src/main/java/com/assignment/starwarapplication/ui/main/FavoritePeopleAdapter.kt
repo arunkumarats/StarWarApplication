@@ -31,7 +31,7 @@ class FavoritePeopleAdapter(private var items: ArrayList<People?>): RecyclerView
 
         //Below loop is recommended by SWAPI API spec to get the name of the film from the film url
         for (i in peopleData?.filmsUrls?.indices!!) {
-            filmstring = filmstring + " "+ SWUtils.filmUrlToFilmTitle(peopleData?.filmsUrls?.get(i).toString())!!
+            filmstring = filmstring + "\n"+ SWUtils.filmUrlToFilmTitle(peopleData?.filmsUrls?.get(i).toString())!!
         }
 
           holder?.txtFavFilms?.text = filmstring

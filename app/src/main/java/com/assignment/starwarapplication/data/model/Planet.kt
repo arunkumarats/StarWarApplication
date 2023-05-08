@@ -4,7 +4,8 @@ import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 /**
- * Created by Oleur on 22/12/2014.
+ * @author Arun
+ * @see SwapAPI documentation
  * Planet model represents a large mass, planet or planetoid in the Star Wars Universe, at the time of 0 ABY.
  */
 class Planet : Serializable {

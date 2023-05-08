@@ -4,7 +4,8 @@ import android.text.TextUtils
 import java.io.Serializable
 
 /**
- * Created by Oleur on 22/12/2014.
+ * @author Arun Kumar Thayalan
+ * @see SwapAPI documentation
  * Generic list model
  */
 class SWModelList<T> : Serializable {

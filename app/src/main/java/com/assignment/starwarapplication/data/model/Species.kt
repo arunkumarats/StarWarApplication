@@ -4,7 +4,8 @@ import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 /**
- * Created by Oleur on 22/12/2014.
+ * @author Arun
+ * @see SwapAPI documentation
  * Species model represents a type of person or character within the Star Wars Universe.
  */
 class Species : Serializable {

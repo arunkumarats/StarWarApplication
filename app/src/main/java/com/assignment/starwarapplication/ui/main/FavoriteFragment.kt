@@ -1,7 +1,5 @@
 package com.assignment.starwarapplication.ui.main
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -61,8 +59,7 @@ class FavoriteFragment : Fragment() {
         below statements read string from sharedpref, convert string to json, covert json to arraylist
         and set arraylist to favorite people recyler view adapter
          */
-        favoritePrefJson = AppPreferencesHelper(requireContext()).getFavoriteChars()
-       // favoritePrefJson = prefs.getString("fav_people_list", "[]").toString()
+        favoritePrefJson = AppPreferencesHelper(requireContext()).favoriteChars.toString()
         favoritePrefList = object : TypeToken<ArrayList<People?>?>() {}.getType()
         favPeopleListPerf = Gson().fromJson(favoritePrefJson, favoritePrefList)
         viewFavPeople.adapter = FavoritePeopleAdapter(favPeopleListPerf)
@@ -72,7 +69,7 @@ class FavoriteFragment : Fragment() {
          below statements read string from sharedpref, convert string to json, covert json to arraylist
          and set arraylist to favorite starship recyler view adapter
         */
-        favoritePrefJson =AppPreferencesHelper(requireContext()).getFavoriteStarship()
+        favoritePrefJson = AppPreferencesHelper(requireContext()).favoriteStarships.toString()
         favoritePrefList = object : TypeToken<ArrayList<Vehicle?>?>() {}.getType()
         favStarshipListPerf = Gson().fromJson(favoritePrefJson, favoritePrefList)
         viewFavStarship.adapter = FavoriteStarshipAdapter(favStarshipListPerf)

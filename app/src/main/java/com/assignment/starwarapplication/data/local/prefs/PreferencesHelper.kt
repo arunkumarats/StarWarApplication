@@ -2,10 +2,13 @@ package com.assignment.starwarapplication.data.local.prefs
 
 /**
  * @author  Arun
+ * Interface for sharedpreference class
+ * Sharedpref getter and setter can add in this class
+ * *
  */
 interface PreferencesHelper {
-    val favoriteChars: String?
-    fun setFavoriteChar(people: String?)
-    var favoriteStarship: String?
-    fun setFavoriteStarship(starship: String?)
+    var favoriteChars: String?
+
+    var favoriteStarships: String?
+
 }

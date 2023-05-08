@@ -1,6 +1,5 @@
 package com.assignment.starwarapplication.data.remote
 
-import android.util.Log
 import com.assignment.starwarapplication.APIConstants
 import com.assignment.starwarapplication.BuildConfig
 import com.assignment.starwarapplication.data.model.*
@@ -15,7 +14,34 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+/**
+ * @author Arun
+ * Main interface for all retrofit api calls and Retrofit client initializer
+ * Any API with query params added here
+ */
 interface RetrofitService {
+
+
+    /**
+     * Home module
+     * Search by people API call invoked here
+     */
+    @GET("/api/people/")
+    fun getPeople(@Query("search") query: String) : Call<SWModelList<People?>?>
+
+
+    /**
+     * Home module
+     * Searcg by starship API call invoked here
+     */
+    @GET("/api/starships/")
+    fun getStarship(@Query("search") query: String) : Call<SWModelList<Vehicle?>?>
+
+
+
+
+    // All below API interfaces for future use, incase of more use case addition
+    //Start of future use API calls
     @GET("/")
     fun getRootUrls(callback: Callback<Root?>?)
 
@@ -24,20 +50,6 @@ interface RetrofitService {
         @Query("page") page: Int,
         callback: Callback<SWModelList<People?>?>?
     )
-
-/*
-    @GET("/people/{id}/")
-    fun getPeople(@Path("id") peopleId: Int,callback: Callback<People?>?)
-*/
-
-    @GET("/api/people/")
-    fun getPeople(@Query("search") query: String) : Call<SWModelList<People?>?>
-
-
-    @GET("/api/starships/")
-    fun getStarship(@Query("search") query: String) : Call<SWModelList<Vehicle?>?>
-
-
 
     @GET("/films/")
     fun getAllFilms(
@@ -50,20 +62,6 @@ interface RetrofitService {
         @Path("id") filmId: Int,
         callback: Callback<Film?>?
     )
-/*
-    @GET("/starships")
-    fun getAllStarships(
-        @Query("page") page: Int,
-        callback: Callback<SWModelList<Starship?>?>?
-    )*/
-
-/*
-    @GET("/starships/{id}/")
-    fun getStarship(
-        @Path("id") starshipId: Int,
-        callback: Callback<Starship?>?
-    )
-*/
 
     @GET("/vehicles/")
     fun getAllVehicles(
@@ -100,6 +98,7 @@ interface RetrofitService {
         @Path("id") planetId: Int,
         callback: Callback<Planet?>?
     )
+    // End of future use case API calls
 
     object RetrofitClient {
         val retrofitClient: Retrofit.Builder by lazy {
