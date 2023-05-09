@@ -6,8 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:layout_margin="@dimen/starwar_margin"
-    android:background="@drawable/shape"
     android:paddingBottom="2dp">
 
     <TextView
@@ -15,9 +13,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Name"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:layout_margin="@dimen/starwar_padding"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -29,8 +24,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Gender"
-        android:textColor="@color/white"
-        android:layout_margin="@dimen/starwar_padding"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_name" />
 
@@ -38,10 +31,8 @@
         android:id="@+id/tv_ships"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/starwar_padding"
-        android:layout_marginLeft="@dimen/starwar_margin3x"
+        android:layout_marginStart="30dp"
         android:text="Ships:"
-        android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@+id/tv_gender"
         app:layout_constraintTop_toBottomOf="@+id/tv_name" />
 
@@ -49,9 +40,9 @@
         android:id="@+id/button"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginEnd="@dimen/starwar_margin"
+        android:layout_marginEnd="4dp"
         android:adjustViewBounds="true"
-        android:src="@drawable/baseline_favorite_black_24"
+        android:src="@android:drawable/btn_star"
         android:text="Button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_name" />
