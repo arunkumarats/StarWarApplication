@@ -1,7 +1,7 @@
 package com.assignment.starwarapplication.utils
 
 /**
- * Created by Oleur on 24/12/2014.
+ * SWAP API provided utility class for processing APIs
  * Utility class for Star Wars API
  */
 object SWUtils {

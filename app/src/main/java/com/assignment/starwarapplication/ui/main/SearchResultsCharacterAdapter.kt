@@ -4,15 +4,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AlphaAnimation
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.assignment.starwarapplication.R
+import com.assignment.starwarapplication.utils.StarWarConstants
 import com.assignment.starwarapplication.data.local.prefs.AppPreferencesHelper
 import com.assignment.starwarapplication.data.model.People
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import kotlin.collections.ArrayList
 
 
 /**
@@ -30,12 +31,13 @@ class SearchResultsCharacterAdapter(private var searchResultList: ArrayList<Peop
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var peopleData = searchResultList[position]
         holder.txtName?.text = peopleData?.name
-        holder.txtGender?.text = "Gender: "+peopleData?.gender
-        holder.txtShips?.text = "Number of ships: "+peopleData?.starshipsUrls?.size.toString()
+        holder.txtGender?.text = StarWarConstants.GENDER + peopleData?.gender
+        holder.txtShips?.text = StarWarConstants.SHIPS + peopleData?.starshipsUrls?.size.toString()
 
         holder.btnFav?.setOnClickListener{
             Log.v("DEBUG : button clicked at position", peopleData?.name.toString() )
 
+            it.startAnimation(AlphaAnimation(1f, 0.8f))
             var json: String = AppPreferencesHelper(it.context).favoriteChars.toString()
             val type = object : TypeToken<java.util.ArrayList<People?>?>() {}.getType()
             favItem = Gson().fromJson(json, type)

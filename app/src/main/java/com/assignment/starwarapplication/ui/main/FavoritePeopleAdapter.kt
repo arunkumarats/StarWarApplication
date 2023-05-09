@@ -6,27 +6,28 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.assignment.starwarapplication.R
+import com.assignment.starwarapplication.utils.StarWarConstants
 import com.assignment.starwarapplication.data.model.People
 import com.assignment.starwarapplication.utils.SWUtils
 
 
 /**
  *@author Arun
+ * Recycler adapter class for populate favorite people from shared pref
+ *
  */
 
 class FavoritePeopleAdapter(private var items: ArrayList<People?>): RecyclerView.Adapter<FavoritePeopleAdapter.ViewHolder>() {
-    private var fav_list = ArrayList<People?>()
-
     override fun getItemCount(): Int {
         return items.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var peopleData = items[position]
-        var filmstring : String = ""
+        var filmstring  = StarWarConstants.FILMS
         holder?.txtFavName?.text = peopleData?.name
-        holder?.txtFavGender?.text = "Gender: "+peopleData?.gender
-        holder?.txtFavShips?.text = "Number of ships: "+peopleData?.starshipsUrls?.size.toString()
+        holder?.txtFavGender?.text = StarWarConstants.GENDER+peopleData?.gender
+        holder?.txtFavShips?.text = StarWarConstants.SHIPS+peopleData?.starshipsUrls?.size.toString()
 
 
         //Below loop is recommended by SWAPI API spec to get the name of the film from the film url
@@ -35,7 +36,6 @@ class FavoritePeopleAdapter(private var items: ArrayList<People?>): RecyclerView
         }
 
           holder?.txtFavFilms?.text = filmstring
-      //  Log.v("DEBUG" ,  +"")
        }
     override fun getItemId(position: Int): Long {
         return position.toLong()

@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.assignment.starwarapplication.R
+import com.assignment.starwarapplication.utils.StarWarConstants
 import com.assignment.starwarapplication.data.model.Vehicle
 
 /**
@@ -24,9 +25,9 @@ class FavoriteStarshipAdapter(private var items: ArrayList<Vehicle?>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var starShipData = items[position]
         holder?.txtFavName?.text = starShipData?.name
-        holder?.txtFavModel?.text = "Model: " + starShipData?.model
-        holder?.txtFavManufacturer?.text = "Manufacturer: " + starShipData?.manufacturer
-        holder?.txtFavPassenger?.text = "Passengers: " + starShipData?.passengers
+        holder?.txtFavModel?.text = StarWarConstants.MODEL + starShipData?.model
+        holder?.txtFavManufacturer?.text = StarWarConstants.MFGR + starShipData?.manufacturer
+        holder?.txtFavPassenger?.text = StarWarConstants.PSNGR + starShipData?.passengers
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

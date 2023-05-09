@@ -1,6 +1,6 @@
 package com.assignment.starwarapplication.data.remote
 
-import com.assignment.starwarapplication.APIConstants
+import com.assignment.starwarapplication.utils.StarWarConstants
 import com.assignment.starwarapplication.BuildConfig
 import com.assignment.starwarapplication.data.model.*
 import retrofit2.Callback
@@ -114,7 +114,7 @@ interface RetrofitService {
             okhttpClient.addInterceptor(logging)
 
             Retrofit.Builder()
-                .baseUrl(APIConstants.BASE_URL)
+                .baseUrl(StarWarConstants.BASE_URL)
                 .client(okhttpClient.build())
                 .addConverterFactory(GsonConverterFactory.create())
         }

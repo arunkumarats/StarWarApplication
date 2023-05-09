@@ -4,10 +4,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AlphaAnimation
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.assignment.starwarapplication.R
+import com.assignment.starwarapplication.utils.StarWarConstants
 import com.assignment.starwarapplication.data.local.prefs.AppPreferencesHelper
 import com.assignment.starwarapplication.data.model.Vehicle
 import com.google.gson.Gson
@@ -18,7 +20,9 @@ import kotlin.collections.ArrayList
 /**
  * @author Arun
  *
- * Adapter class: Search results for starship
+ * Adapter class: Search results recycler adapter for starship
+ * favorite button click functionalities goes here
+ *
  */
 
 class SearchResultsStarshipAdapter(private var searchResultVehicle: ArrayList<Vehicle?>, ): RecyclerView.Adapter<SearchResultsStarshipAdapter.ViewHolder>() {
@@ -32,14 +36,15 @@ class SearchResultsStarshipAdapter(private var searchResultVehicle: ArrayList<Ve
         var vehicleData = searchResultVehicle[position]
 
         holder.txtShipname?.text = vehicleData?.name
-        holder.txtModel?.text = "Model: "+vehicleData?.model
-        holder.txtManufacturer?.text = "Manufacturer: "+vehicleData?.manufacturer
-        holder.txtPassenger?.text = "Passenger:" + vehicleData?.passengers
+        holder.txtModel?.text = StarWarConstants.MODEL + vehicleData?.model
+        holder.txtManufacturer?.text = StarWarConstants.MFGR + vehicleData?.manufacturer
+        holder.txtPassenger?.text = StarWarConstants.PSNGR + vehicleData?.passengers
 
         holder.btnFavStarship?.setOnClickListener{
             Log.v("DEBUG : button clicked at position", vehicleData?.name.toString() )
 
 
+            it.startAnimation(AlphaAnimation(1f, 0.8f))
             /**
              * Below logic to conver the String->Json-> Arraylist and vice versa
              * This is to reduce sharedpref overhead and keeps simple memory
