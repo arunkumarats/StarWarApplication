@@ -43,7 +43,7 @@ class HomeFragment : Fragment() {
             R.layout.fragment_home,
             container, false
         )
-        mainActivityViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        mainActivityViewModel = ViewModelProvider(this)[MainViewModel::class.java]
         searchView = view.findViewById(R.id.sv_search_bar)!!
         progressView = view.findViewById(R.id.progressbar_home)!!
         searchResultRecyclerView = view.findViewById(R.id.rv_charactersview)!!
@@ -60,9 +60,9 @@ class HomeFragment : Fragment() {
 
             Log.v("DEBUG", "Toggle: $isChecked")
             if(isChecked){
-                searchFilterToggle.setText("Show results in Starship")
+                searchFilterToggle.text = "Show results in Starship"
             }else{
-                searchFilterToggle.setText("Show results in Starwar character")
+                searchFilterToggle.text = "Show results in Starwar character"
             }
 
 
@@ -83,7 +83,7 @@ class HomeFragment : Fragment() {
 
                     progressView.visibility = View.VISIBLE
 
-                    if(searchFilterToggle.isChecked()){
+                    if(searchFilterToggle.isChecked){
                         mainActivityViewModel.getStarship(query)
                             .observe(viewLifecycleOwner, Observer { serviceSetterGetter ->
 

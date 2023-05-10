@@ -25,7 +25,7 @@ import kotlin.collections.ArrayList
  *
  */
 
-class SearchResultsStarshipAdapter(private var searchResultVehicle: ArrayList<Vehicle?>, ): RecyclerView.Adapter<SearchResultsStarshipAdapter.ViewHolder>() {
+class SearchResultsStarshipAdapter(private var searchResultVehicle: ArrayList<Vehicle?>): RecyclerView.Adapter<SearchResultsStarshipAdapter.ViewHolder>() {
     private var favStarshipList = ArrayList<Vehicle?>()
     private lateinit var favStarshipJsonString : String
     override fun getItemCount(): Int {
@@ -35,20 +35,20 @@ class SearchResultsStarshipAdapter(private var searchResultVehicle: ArrayList<Ve
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var vehicleData = searchResultVehicle[position]
 
-        holder.txtShipname?.text = vehicleData?.name
-        holder.txtModel?.text = StarWarConstants.MODEL + vehicleData?.model
-        holder.txtManufacturer?.text = StarWarConstants.MFGR + vehicleData?.manufacturer
-        holder.txtPassenger?.text = StarWarConstants.PSNGR + vehicleData?.passengers
+        holder.txtShipname.text = vehicleData?.name
+        holder.txtModel.text = StarWarConstants.MODEL + vehicleData?.model
+        holder.txtManufacturer.text = StarWarConstants.MFGR + vehicleData?.manufacturer
+        holder.txtPassenger.text = StarWarConstants.PSNGR + vehicleData?.passengers
 
-        holder.btnFavStarship?.setOnClickListener{
+        holder.btnFavStarship.setOnClickListener{
             Log.v("DEBUG : button clicked at position", vehicleData?.name.toString() )
 
 
             it.startAnimation(AlphaAnimation(1f, 0.8f))
             /**
-             * Below logic to conver the String->Json-> Arraylist and vice versa
-             * This is to reduce sharedpref overhead and keeps simple memory
-             * SQLite db is an another option but not recommended to strore simple starwar API data
+             * Below logic to convert the String->Json-> Arraylist and vice versa
+             * This is to reduce shared-pref overhead and keeps simple memory
+             * SQLite db is an another option but not recommended to store simple starwar API data
              */
             favStarshipJsonString = AppPreferencesHelper(it.context).favoriteStarships.toString()
             val type = object : TypeToken<java.util.ArrayList<Vehicle?>?>() {}.getType()
@@ -68,11 +68,11 @@ class SearchResultsStarshipAdapter(private var searchResultVehicle: ArrayList<Ve
         return ViewHolder(itemView)
     }
 
-    // Method to clear current listitem and reload the updated recyclerview items
+    // Method to clear current list-item and reload the updated recyclerview items
     fun submitList(newData: ArrayList<Vehicle?>) {
         searchResultVehicle.clear()
         searchResultVehicle.addAll(newData)
-        notifyDataSetChanged()
+        notifyDataSetChanged() // necessary to refresh the recycler view
     }
 
     class ViewHolder(row: View) : RecyclerView.ViewHolder(row) {

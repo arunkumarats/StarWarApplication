@@ -23,10 +23,8 @@ import java.lang.reflect.Type
  */
 class FavoriteFragment : Fragment() {
 
-    private var layoutManager: RecyclerView.LayoutManager? = null
-
-    lateinit var viewFavPeople: RecyclerView
-    lateinit var viewFavStarship: RecyclerView
+    private lateinit var viewFavPeople: RecyclerView
+    private lateinit var viewFavStarship: RecyclerView
 
     private var favPeopleListPerf = ArrayList<People?>()
     private var favStarshipListPerf = ArrayList<Vehicle?>()
@@ -36,13 +34,13 @@ class FavoriteFragment : Fragment() {
     override fun onCreateView(
 
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater?.inflate(
+    ): View {
+        val view = inflater.inflate(
             R.layout.fragment_favorites, container, false
         )
 
         viewFavPeople = view?.findViewById(R.id.rv_favorite_chars)!!
-        viewFavStarship = view?.findViewById(R.id.rv_favorite_starships)!!
+        viewFavStarship = view.findViewById(R.id.rv_favorite_starships)!!
         viewFavPeople.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         viewFavStarship.layoutManager =
@@ -56,21 +54,21 @@ class FavoriteFragment : Fragment() {
 
         /*
         CHARACTER(PEOPLE)
-        below statements read string from sharedpref, convert string to json, covert json to arraylist
-        and set arraylist to favorite people recyler view adapter
+        below statements read string from shared-pref, convert string to json, covert json to arraylist
+        and set arraylist to favorite people recycler view adapter
          */
         favoritePrefJson = AppPreferencesHelper(requireContext()).favoriteChars.toString()
-        favoritePrefList = object : TypeToken<ArrayList<People?>?>() {}.getType()
+        favoritePrefList = object : TypeToken<ArrayList<People?>?>() {}.type
         favPeopleListPerf = Gson().fromJson(favoritePrefJson, favoritePrefList)
         viewFavPeople.adapter = FavoritePeopleAdapter(favPeopleListPerf)
 
         /*
         STARSHIP
-         below statements read string from sharedpref, convert string to json, covert json to arraylist
-         and set arraylist to favorite starship recyler view adapter
+         below statements read string from shared-pref, convert string to json, covert json to arraylist
+         and set arraylist to favorite starship recycler view adapter
         */
         favoritePrefJson = AppPreferencesHelper(requireContext()).favoriteStarships.toString()
-        favoritePrefList = object : TypeToken<ArrayList<Vehicle?>?>() {}.getType()
+        favoritePrefList = object : TypeToken<ArrayList<Vehicle?>?>() {}.type
         favStarshipListPerf = Gson().fromJson(favoritePrefJson, favoritePrefList)
         viewFavStarship.adapter = FavoriteStarshipAdapter(favStarshipListPerf)
 

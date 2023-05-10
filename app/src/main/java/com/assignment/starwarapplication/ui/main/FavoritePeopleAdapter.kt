@@ -25,9 +25,9 @@ class FavoritePeopleAdapter(private var items: ArrayList<People?>): RecyclerView
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var peopleData = items[position]
         var filmstring  = StarWarConstants.FILMS
-        holder?.txtFavName?.text = peopleData?.name
-        holder?.txtFavGender?.text = StarWarConstants.GENDER+peopleData?.gender
-        holder?.txtFavShips?.text = StarWarConstants.SHIPS+peopleData?.starshipsUrls?.size.toString()
+        holder.txtFavName.text = peopleData?.name
+        holder.txtFavGender.text = StarWarConstants.GENDER+peopleData?.gender
+        holder.txtFavShips.text = StarWarConstants.SHIPS+peopleData?.starshipsUrls?.size.toString()
 
 
         //Below loop is recommended by SWAPI API spec to get the name of the film from the film url
@@ -35,7 +35,7 @@ class FavoritePeopleAdapter(private var items: ArrayList<People?>): RecyclerView
             filmstring = filmstring + "\n"+ SWUtils.filmUrlToFilmTitle(peopleData?.filmsUrls?.get(i).toString())!!
         }
 
-          holder?.txtFavFilms?.text = filmstring
+          holder.txtFavFilms.text = filmstring
        }
     override fun getItemId(position: Int): Long {
         return position.toLong()
@@ -49,12 +49,6 @@ class FavoritePeopleAdapter(private var items: ArrayList<People?>): RecyclerView
             .inflate(R.layout.listitem_favorite_characters, parent, false)
 
         return ViewHolder(itemView)
-    }
-
-    fun submitList(newData: ArrayList<People?>) {
-        items.clear()
-        items.addAll(newData)
-        notifyDataSetChanged()
     }
 
     class ViewHolder(row: View) : RecyclerView.ViewHolder(row) {

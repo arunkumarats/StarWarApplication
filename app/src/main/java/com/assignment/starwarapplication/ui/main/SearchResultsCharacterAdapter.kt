@@ -30,11 +30,11 @@ class SearchResultsCharacterAdapter(private var searchResultList: ArrayList<Peop
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var peopleData = searchResultList[position]
-        holder.txtName?.text = peopleData?.name
-        holder.txtGender?.text = StarWarConstants.GENDER + peopleData?.gender
-        holder.txtShips?.text = StarWarConstants.SHIPS + peopleData?.starshipsUrls?.size.toString()
+        holder.txtName.text = peopleData?.name
+        holder.txtGender.text = StarWarConstants.GENDER + peopleData?.gender
+        holder.txtShips.text = StarWarConstants.SHIPS + peopleData?.starshipsUrls?.size.toString()
 
-        holder.btnFav?.setOnClickListener{
+        holder.btnFav.setOnClickListener{
             Log.v("DEBUG : button clicked at position", peopleData?.name.toString() )
 
             it.startAnimation(AlphaAnimation(1f, 0.8f))

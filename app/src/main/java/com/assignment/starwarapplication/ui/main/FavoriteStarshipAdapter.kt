@@ -24,10 +24,10 @@ class FavoriteStarshipAdapter(private var items: ArrayList<Vehicle?>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var starShipData = items[position]
-        holder?.txtFavName?.text = starShipData?.name
-        holder?.txtFavModel?.text = StarWarConstants.MODEL + starShipData?.model
-        holder?.txtFavManufacturer?.text = StarWarConstants.MFGR + starShipData?.manufacturer
-        holder?.txtFavPassenger?.text = StarWarConstants.PSNGR + starShipData?.passengers
+        holder.txtFavName.text = starShipData?.name
+        holder.txtFavModel.text = StarWarConstants.MODEL + starShipData?.model
+        holder.txtFavManufacturer.text = StarWarConstants.MFGR + starShipData?.manufacturer
+        holder.txtFavPassenger.text = StarWarConstants.PSNGR + starShipData?.passengers
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

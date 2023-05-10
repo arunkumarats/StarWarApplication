@@ -1,7 +1,6 @@
 package com.assignment.starwarapplication.data.model
 
 import com.google.gson.annotations.SerializedName
-import java.io.Serializable
 
 /**
  * @author Arun

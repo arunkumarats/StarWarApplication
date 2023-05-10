@@ -24,7 +24,7 @@ import com.google.android.material.tabs.TabLayout
  **/
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var context: Context
+
     private var viewPagerAdapter: ViewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
     lateinit var starwarActivityViewModel: MainViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
         viewPagerAdapter.addFragment(FavoriteFragment(), StarWarConstants.FAV)
 
         // setting adapter to view pager.
-        viewpager.setAdapter(viewPagerAdapter)
+        viewpager.adapter = viewPagerAdapter
 
         viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
 
@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onPageSelected(position: Int) {
-                viewpager.getAdapter()?.notifyDataSetChanged();
+                viewpager.adapter?.notifyDataSetChanged()
             }
 
         })
@@ -86,15 +86,15 @@ class MainActivity : AppCompatActivity() {
     class ViewPagerAdapter : FragmentPagerAdapter {
 
      /* One is of Fragment type and another one is of String type.*/
-        private final var fragmentList1: ArrayList<Fragment> = ArrayList()
-        private final var fragmentTitleList1: ArrayList<String> = ArrayList()
+        private var fragmentList1: ArrayList<Fragment> = ArrayList()
+        private var fragmentTitleList1: ArrayList<String> = ArrayList()
 
         public constructor(supportFragmentManager: FragmentManager)
                 : super(supportFragmentManager)
 
         // returns item from list of fragments.
         override fun getItem(position: Int): Fragment {
-            return fragmentList1.get(position)
+            return fragmentList1[position]
         }
 
         override fun getItemPosition(`object`: Any): Int {
@@ -103,7 +103,7 @@ class MainActivity : AppCompatActivity() {
 
         // returns which item is selected from fragment titles.
         override fun getPageTitle(position: Int): CharSequence {
-            return fragmentTitleList1.get(position)
+            return fragmentTitleList1[position]
         }
 
         // returns the number of items present in arraylist.
